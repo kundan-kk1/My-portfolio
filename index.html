@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kundan Kushwaha — MIS Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Cabinet+Grotesk:wght@400;500;700;800&family=Zodiak:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+
+:root{
+  --bg: #06040f;
+  --surface: #0f0b1f;
+  --card: #131029;
+  --border: rgba(255,255,255,0.07);
+  --text: #f0eeff;
+  --muted: #8880aa;
+  --cyan: #00f0c8;
+  --violet: #a855f7;
+  --pink: #f472b6;
+  --amber: #fbbf24;
+  --blue: #38bdf8;
+  --green: #4ade80;
+  --g1: linear-gradient(135deg, #00f0c8, #38bdf8);
+  --g2: linear-gradient(135deg, #a855f7, #f472b6);
+  --g3: linear-gradient(135deg, #fbbf24, #f97316);
+  --g4: linear-gradient(135deg, #4ade80, #06b6d4);
+}
+
+body{
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Outfit', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── CURSOR GLOW ── */
+.cursor-glow{
+  position:fixed;width:500px;height:500px;
+  border-radius:50%;pointer-events:none;z-index:0;
+  background:radial-gradient(circle, rgba(168,85,247,0.08) 0%, transparent 70%);
+  transform:translate(-50%,-50%);
+  transition:left 0.4s ease, top 0.4s ease;
+}
+
+/* ── NAV ── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.2rem 5rem;
+  background:rgba(6,4,15,0.7);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+
+.logo{
+  font-family:'Fraunces',serif;font-style:italic;
+  font-size:1.4rem;color:var(--text);text-decoration:none;
+  display:flex;align-items:center;gap:0.4rem;
+}
+.logo-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--g1);
+  animation:pulse 2s infinite;
+}
+
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{
+  text-decoration:none;color:var(--muted);
+  font-size:13px;letter-spacing:0.06em;font-weight:500;
+  transition:color 0.2s;
+}
+.nav-links a:hover{color:var(--cyan)}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;
+  text-align:center;
+  padding:120px 2rem 4rem;
+  position:relative;overflow:hidden;
+}
+
+/* Gradient orbs */
+.orb{
+  position:absolute;border-radius:50%;filter:blur(80px);opacity:0.35;
+  pointer-events:none;animation:float 8s ease-in-out infinite;
+}
+.orb-1{width:500px;height:500px;background:#a855f7;top:-100px;left:-100px;animation-delay:0s}
+.orb-2{width:400px;height:400px;background:#00f0c8;bottom:-80px;right:-80px;animation-delay:-3s}
+.orb-3{width:300px;height:300px;background:#f472b6;top:40%;left:60%;animation-delay:-6s}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.4rem 1.2rem;
+  border:1px solid rgba(0,240,200,0.3);
+  border-radius:100px;
+  font-size:12px;letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--cyan);background:rgba(0,240,200,0.07);
+  margin-bottom:2rem;
+  animation:fadeUp 0.8s ease both;
+}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:pulse 1.5s infinite}
+
+.hero-name{
+  font-family:'Fraunces',serif;
+  font-size:clamp(3.5rem,9vw,8rem);
+  font-weight:300;
+  line-height:1.0;
+  letter-spacing:-0.02em;
+  margin-bottom:1rem;
+  animation:fadeUp 0.8s 0.15s ease both;
+}
+
+.hero-name .grad-text{
+  background:var(--g2);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  font-style:italic;
+}
+
+.hero-role{
+  font-size:1.1rem;color:var(--muted);
+  margin-bottom:2.5rem;font-weight:400;
+  animation:fadeUp 0.8s 0.25s ease both;
+}
+
+.hero-role strong{color:var(--text);font-weight:600}
+
+.hero-stats{
+  display:flex;gap:1.5rem;justify-content:center;flex-wrap:wrap;
+  margin-bottom:3rem;
+  animation:fadeUp 0.8s 0.35s ease both;
+}
+
+.hero-stat{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:1.2rem 2rem;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+
+.hero-stat::before{
+  content:'';position:absolute;inset:0;
+  opacity:0.05;
+}
+
+.hero-stat:nth-child(1)::before{background:var(--g1)}
+.hero-stat:nth-child(2)::before{background:var(--g2)}
+.hero-stat:nth-child(3)::before{background:var(--g3)}
+.hero-stat:nth-child(4)::before{background:var(--g4)}
+
+.stat-num{
+  font-family:'Fraunces',serif;
+  font-size:2.2rem;font-weight:300;line-height:1;
+  margin-bottom:0.3rem;
+}
+
+.hero-stat:nth-child(1) .stat-num{background:var(--g1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-stat:nth-child(2) .stat-num{background:var(--g2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-stat:nth-child(3) .stat-num{background:var(--g3);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-stat:nth-child(4) .stat-num{background:var(--g4);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+.stat-label{font-size:11px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase}
+
+.hero-cta{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp 0.8s 0.45s ease both;
+}
+
+.btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.9rem 2.2rem;border-radius:100px;
+  font-size:13px;letter-spacing:0.06em;font-weight:600;
+  text-decoration:none;cursor:pointer;border:none;
+  transition:all 0.25s;font-family:'Outfit',sans-serif;
+}
+
+.btn-primary{
+  background:var(--g1);color:#06040f;
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 30px rgba(0,240,200,0.4)}
+
+.btn-ghost{
+  background:transparent;color:var(--text);
+  border:1px solid var(--border);
+}
+.btn-ghost:hover{border-color:var(--violet);color:var(--violet);transform:translateY(-2px)}
+
+/* ── SECTION BASE ── */
+section{padding:8rem 5rem;position:relative;z-index:1}
+
+.sec-label{
+  font-size:11px;letter-spacing:0.2em;text-transform:uppercase;
+  margin-bottom:0.8rem;font-weight:600;
+}
+
+.sec-title{
+  font-family:'Fraunces',serif;
+  font-size:clamp(2rem,4vw,3.5rem);
+  font-weight:300;line-height:1.1;
+  margin-bottom:1rem;
+}
+
+.sec-title em{font-style:italic}
+
+.section-inner{max-width:1200px;margin:0 auto}
+
+/* ── ABOUT ── */
+#about{background:var(--surface)}
+
+.about-wrap{
+  display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:start;
+}
+
+.about-text{color:var(--muted);line-height:1.9;font-size:15px}
+.about-text p+p{margin-top:1.2rem}
+
+.about-quote{
+  font-family:'Fraunces',serif;font-style:italic;
+  font-size:1.25rem;color:var(--text);
+  border-left:3px solid;
+  border-image:var(--g2) 1;
+  padding-left:1.5rem;
+  margin:2rem 0;
+  line-height:1.6;
+}
+
+.about-contact-row{
+  display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem;
+}
+
+.contact-chip{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.5rem 1.2rem;border-radius:100px;
+  background:var(--card);border:1px solid var(--border);
+  font-size:12px;color:var(--muted);text-decoration:none;
+  transition:all 0.2s;
+}
+.contact-chip:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* Skills */
+.skills-section-title{
+  font-size:13px;letter-spacing:0.08em;text-transform:uppercase;
+  color:var(--muted);margin-bottom:1.5rem;font-weight:600;
+}
+
+.skills-categories{display:flex;flex-direction:column;gap:1.5rem}
+
+.skill-cat{}
+.skill-cat-name{
+  font-size:12px;letter-spacing:0.1em;text-transform:uppercase;
+  margin-bottom:0.7rem;font-weight:600;
+}
+
+.skill-cat:nth-child(1) .skill-cat-name{color:var(--cyan)}
+.skill-cat:nth-child(2) .skill-cat-name{color:var(--violet)}
+.skill-cat:nth-child(3) .skill-cat-name{color:var(--amber)}
+.skill-cat:nth-child(4) .skill-cat-name{color:var(--pink)}
+.skill-cat:nth-child(5) .skill-cat-name{color:var(--green)}
+
+.skill-pills{display:flex;flex-wrap:wrap;gap:0.5rem}
+
+.pill{
+  padding:0.3rem 0.9rem;border-radius:100px;
+  font-size:12px;font-weight:500;border:1px solid;
+}
+.pill-cyan{color:var(--cyan);border-color:rgba(0,240,200,0.25);background:rgba(0,240,200,0.05)}
+.pill-violet{color:var(--violet);border-color:rgba(168,85,247,0.25);background:rgba(168,85,247,0.05)}
+.pill-amber{color:var(--amber);border-color:rgba(251,191,36,0.25);background:rgba(251,191,36,0.05)}
+.pill-pink{color:var(--pink);border-color:rgba(244,114,182,0.25);background:rgba(244,114,182,0.05)}
+.pill-green{color:var(--green);border-color:rgba(74,222,128,0.25);background:rgba(74,222,128,0.05)}
+
+/* ── EXPERIENCE ── */
+#experience{}
+
+.exp-timeline{display:flex;flex-direction:column;gap:0;margin-top:1rem}
+
+.exp-card{
+  display:grid;grid-template-columns:240px 1fr;
+  border-top:1px solid var(--border);
+  padding:3rem 0;
+  gap:4rem;
+  position:relative;
+  transition:background 0.3s;
+}
+
+.exp-card:hover{background:rgba(255,255,255,0.01)}
+
+.exp-meta{}
+
+.exp-period{
+  font-size:11px;letter-spacing:0.06em;
+  color:var(--muted);margin-bottom:0.8rem;
+}
+
+.exp-company{
+  font-family:'Fraunces',serif;font-size:1.1rem;font-weight:400;
+  color:var(--text);margin-bottom:0.3rem;
+}
+
+.exp-location{font-size:12px;color:var(--muted)}
+
+.exp-badge{
+  display:inline-block;margin-top:1rem;
+  padding:0.25rem 0.8rem;border-radius:100px;
+  font-size:10px;letter-spacing:0.1em;text-transform:uppercase;font-weight:600;
+}
+.badge-current{background:rgba(0,240,200,0.1);color:var(--cyan);border:1px solid rgba(0,240,200,0.3)}
+.badge-past{background:rgba(168,85,247,0.1);color:var(--violet);border:1px solid rgba(168,85,247,0.3)}
+
+.exp-role{
+  font-family:'Fraunces',serif;font-size:1.6rem;font-weight:300;font-style:italic;
+  color:var(--text);margin-bottom:1.5rem;line-height:1.2;
+}
+
+.exp-bullets{list-style:none;display:flex;flex-direction:column;gap:0.9rem}
+
+.exp-bullets li{
+  display:flex;gap:1rem;
+  font-size:14px;color:var(--muted);line-height:1.7;
+}
+
+.exp-bullets li .bullet-icon{
+  width:20px;height:20px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;margin-top:3px;font-size:9px;
+}
+
+.exp-card:nth-child(1) .bullet-icon{background:rgba(0,240,200,0.15);color:var(--cyan)}
+.exp-card:nth-child(2) .bullet-icon{background:rgba(168,85,247,0.15);color:var(--violet)}
+
+.exp-bullets li strong{color:var(--text);font-weight:600}
+
+.exp-highlight{
+  display:inline-flex;align-items:center;gap:0.4rem;
+  padding:0.15rem 0.6rem;border-radius:4px;
+  font-weight:600;font-size:13px;
+}
+.highlight-green{background:rgba(74,222,128,0.12);color:var(--green)}
+.highlight-cyan{background:rgba(0,240,200,0.12);color:var(--cyan)}
+
+/* ── ACHIEVEMENTS ── */
+#achievements{background:var(--surface)}
+
+.ach-grid{
+  display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;
+  margin-top:1rem;
+}
+
+.ach-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:2.5rem;
+  position:relative;overflow:hidden;
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+
+.ach-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+
+.ach-card::before{
+  content:'';position:absolute;inset:0;opacity:0;
+  transition:opacity 0.3s;border-radius:20px;
+}
+
+.ach-card:hover::before{opacity:1}
+.ach-card:nth-child(1)::before{background:linear-gradient(135deg,rgba(0,240,200,0.05),transparent)}
+.ach-card:nth-child(2)::before{background:linear-gradient(135deg,rgba(168,85,247,0.05),transparent)}
+.ach-card:nth-child(3)::before{background:linear-gradient(135deg,rgba(251,191,36,0.05),transparent)}
+.ach-card:nth-child(4)::before{background:linear-gradient(135deg,rgba(244,114,182,0.05),transparent)}
+
+.ach-icon{
+  width:52px;height:52px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;margin-bottom:1.5rem;
+}
+.ach-card:nth-child(1) .ach-icon{background:rgba(0,240,200,0.1)}
+.ach-card:nth-child(2) .ach-icon{background:rgba(168,85,247,0.1)}
+.ach-card:nth-child(3) .ach-icon{background:rgba(251,191,36,0.1)}
+.ach-card:nth-child(4) .ach-icon{background:rgba(244,114,182,0.1)}
+
+.ach-title{font-size:1rem;font-weight:700;margin-bottom:0.7rem;color:var(--text)}
+.ach-desc{font-size:13px;color:var(--muted);line-height:1.7}
+
+/* ── PROJECTS ── */
+#projects{}
+
+.proj-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:1rem}
+
+.proj-card{
+  border-radius:24px;padding:0;overflow:hidden;
+  border:1px solid var(--border);
+  position:relative;cursor:pointer;
+  transition:transform 0.3s,box-shadow 0.3s;
+  background:var(--card);
+}
+
+.proj-card:hover{transform:translateY(-6px);box-shadow:0 30px 80px rgba(0,0,0,0.4)}
+
+.proj-header{
+  padding:3rem;
+  position:relative;overflow:hidden;
+  min-height:180px;display:flex;flex-direction:column;justify-content:flex-end;
+}
+
+.proj-card:nth-child(1) .proj-header{background:linear-gradient(135deg,#0a1628,#0d2040)}
+.proj-card:nth-child(2) .proj-header{background:linear-gradient(135deg,#1a0a28,#2d0f40)}
+
+.proj-header-glow{
+  position:absolute;width:200px;height:200px;border-radius:50%;
+  filter:blur(60px);opacity:0.4;top:-40px;right:-40px;
+}
+.proj-card:nth-child(1) .proj-header-glow{background:var(--cyan)}
+.proj-card:nth-child(2) .proj-header-glow{background:var(--violet)}
+
+.proj-num{
+  position:absolute;top:1.5rem;right:1.5rem;
+  font-family:'Fraunces',serif;font-size:5rem;font-weight:300;
+  opacity:0.08;line-height:1;color:white;
+}
+
+.proj-icon-wrap{
+  width:56px;height:56px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;margin-bottom:1rem;
+  backdrop-filter:blur(10px);
+}
+.proj-card:nth-child(1) .proj-icon-wrap{background:rgba(0,240,200,0.15)}
+.proj-card:nth-child(2) .proj-icon-wrap{background:rgba(168,85,247,0.15)}
+
+.proj-title{font-family:'Fraunces',serif;font-size:1.3rem;font-weight:400;color:white}
+
+.proj-body{padding:2rem}
+
+.proj-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:1.5rem}
+
+.proj-tags{display:flex;flex-wrap:wrap;gap:0.4rem}
+
+/* ── EDUCATION ── */
+#education{background:var(--surface)}
+
+.edu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:1rem}
+
+.edu-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:20px;padding:2rem;
+  position:relative;overflow:hidden;
+  transition:transform 0.3s;
+}
+
+.edu-card:hover{transform:translateY(-3px)}
+
+.edu-card-top{height:4px;border-radius:4px 4px 0 0;position:absolute;top:0;left:0;right:0}
+.edu-card:nth-child(1) .edu-card-top{background:var(--g1)}
+.edu-card:nth-child(2) .edu-card-top{background:var(--g2)}
+.edu-card:nth-child(3) .edu-card-top{background:var(--g3)}
+
+.edu-year{font-size:11px;color:var(--muted);letter-spacing:0.08em;margin-bottom:1rem;margin-top:0.5rem}
+.edu-degree{font-family:'Fraunces',serif;font-size:1.05rem;font-weight:400;color:var(--text);margin-bottom:0.5rem;line-height:1.3}
+.edu-inst{font-size:12px;color:var(--muted);line-height:1.5}
+
+/* ── CONTACT CTA ── */
+#contact{
+  text-align:center;
+  background:var(--bg);
+  position:relative;overflow:hidden;
+}
+
+.contact-orb{
+  position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none;
+}
+.contact-orb-1{width:600px;height:600px;background:#a855f7;opacity:0.12;top:-200px;left:50%;transform:translateX(-50%)}
+.contact-orb-2{width:300px;height:300px;background:#00f0c8;opacity:0.1;bottom:0;left:0}
+
+.contact-inner{position:relative;z-index:1}
+.contact-sub{font-size:1.1rem;color:var(--muted);max-width:500px;margin:1rem auto 3rem;line-height:1.7}
+
+.contact-row{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap}
+
+.contact-btn{
+  display:inline-flex;align-items:center;gap:0.7rem;
+  padding:1rem 2rem;border-radius:100px;
+  font-size:13px;font-weight:600;letter-spacing:0.04em;
+  text-decoration:none;transition:all 0.25s;
+  font-family:'Outfit',sans-serif;
+}
+
+.contact-btn-email{background:var(--g2);color:white}
+.contact-btn-email:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(168,85,247,0.5)}
+
+.contact-btn-phone{background:var(--card);border:1px solid var(--border);color:var(--text)}
+.contact-btn-phone:hover{border-color:var(--cyan);color:var(--cyan);transform:translateY(-2px)}
+
+.contact-btn-loc{background:var(--card);border:1px solid var(--border);color:var(--text)}
+.contact-btn-loc:hover{border-color:var(--pink);color:var(--pink);transform:translateY(-2px)}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border);
+  padding:2rem 5rem;
+  display:flex;justify-content:space-between;align-items:center;
+  font-size:12px;color:var(--muted);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes float{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-30px)}
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1)}
+  50%{opacity:0.5;transform:scale(0.8)}
+}
+
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:none}
+.reveal-d1{transition-delay:0.1s}
+.reveal-d2{transition-delay:0.2s}
+.reveal-d3{transition-delay:0.3s}
+.reveal-d4{transition-delay:0.4s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){
+  nav{padding:1rem 1.5rem}
+  .nav-links{display:none}
+  section{padding:5rem 1.5rem}
+  .about-wrap{grid-template-columns:1fr;gap:3rem}
+  .exp-card{grid-template-columns:1fr;gap:1rem}
+  .ach-grid,.proj-grid,.edu-grid{grid-template-columns:1fr}
+  footer{flex-direction:column;gap:0.5rem;text-align:center;padding:1.5rem}
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-glow" id="cursorGlow"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="logo" href="#hero">
+    <div class="logo-dot"></div>
+    Kundan
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#achievements">Achievements</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ───── HERO ───── -->
+<section id="hero">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <div class="hero-badge">
+    <div class="badge-dot"></div>
+    Available for Opportunities
+  </div>
+
+  <h1 class="hero-name">
+    Kundan<br><span class="grad-text">Kushwaha</span>
+  </h1>
+
+  <p class="hero-role">
+    <strong>MIS Analyst</strong> &nbsp;·&nbsp; Data &amp; Business Intelligence Specialist &nbsp;·&nbsp; Delhi, India
+  </p>
+
+  <div class="hero-stats">
+    <div class="hero-stat reveal">
+      <div class="stat-num">2+</div>
+      <div class="stat-label">Years Experience</div>
+    </div>
+    <div class="hero-stat reveal reveal-d1">
+      <div class="stat-num">10%</div>
+      <div class="stat-label">Sales Growth</div>
+    </div>
+    <div class="hero-stat reveal reveal-d2">
+      <div class="stat-num">3+</div>
+      <div class="stat-label">BI Tools Mastered</div>
+    </div>
+    <div class="hero-stat reveal reveal-d3">
+      <div class="stat-num">99%+</div>
+      <div class="stat-label">Data Accuracy</div>
+    </div>
+  </div>
+
+  <div class="hero-cta">
+    <a href="#experience" class="btn btn-primary">View Experience ↓</a>
+    <a href="#contact" class="btn btn-ghost">Get In Touch</a>
+  </div>
+</section>
+
+<!-- ───── ABOUT ───── -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-wrap">
+      <div class="reveal">
+        <div class="sec-label" style="color:var(--cyan)">About Me</div>
+        <h2 class="sec-title">Turning raw data into<br><em>real decisions</em></h2>
+        <div class="about-text">
+          <p>Results-driven MIS Analyst with 2+ years of experience transforming raw data into actionable business intelligence. I specialise in end-to-end ETL pipelines, interactive dashboards, and advanced data analysis using Python and SQL.</p>
+          <div class="about-quote">
+            "I don't just analyse data — I translate it into the language of business strategy."
+          </div>
+          <p>Proven track record of driving measurable outcomes — including a <strong style="color:var(--green)">10% sales growth</strong> — through data-driven strategic recommendations. Adept at collaborating with cross-functional teams to integrate insights into operational workflows.</p>
+        </div>
+        <div class="about-contact-row">
+          <a href="mailto:kundan9572700@gmail.com" class="contact-chip">
+            ✉ kundan9572700@gmail.com
+          </a>
+          <a href="tel:+919572700201" class="contact-chip">
+            📞 +91 9572700201
+          </a>
+          <span class="contact-chip">📍 Delhi, India</span>
+        </div>
+      </div>
+
+      <div class="reveal reveal-d1">
+        <div class="skills-section-title">Core Competencies</div>
+        <div class="skills-categories">
+          <div class="skill-cat">
+            <div class="skill-cat-name">Business Intelligence</div>
+            <div class="skill-pills">
+              <span class="pill pill-cyan">Power BI</span>
+              <span class="pill pill-cyan">Google Looker Studio</span>
+              <span class="pill pill-cyan">Excel Dashboards</span>
+            </div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-name">Programming & Scripting</div>
+            <div class="skill-pills">
+              <span class="pill pill-violet">Python</span>
+              <span class="pill pill-violet">Pandas</span>
+              <span class="pill pill-violet">NumPy</span>
+              <span class="pill pill-violet">Matplotlib</span>
+              <span class="pill pill-violet">SQL</span>
+              <span class="pill pill-violet">MS SQL Server</span>
+            </div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-name">Data Management</div>
+            <div class="skill-pills">
+              <span class="pill pill-amber">ETL Processes</span>
+              <span class="pill pill-amber">EDA</span>
+              <span class="pill pill-amber">Data Cleaning</span>
+              <span class="pill pill-amber">Data Validation</span>
+            </div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-name">Productivity Tools</div>
+            <div class="skill-pills">
+              <span class="pill pill-pink">MS Excel (Advanced)</span>
+              <span class="pill pill-pink">Google Sheets</span>
+              <span class="pill pill-pink">Pivot Tables</span>
+            </div>
+          </div>
+          <div class="skill-cat">
+            <div class="skill-cat-name">Domain Knowledge</div>
+            <div class="skill-pills">
+              <span class="pill pill-green">FMS</span>
+              <span class="pill pill-green">IMS</span>
+              <span class="pill pill-green">PMS</span>
+              <span class="pill pill-green">Inventory Management</span>
+              <span class="pill pill-green">Performance Systems</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── EXPERIENCE ───── -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="sec-label reveal" style="color:var(--violet)">Professional Experience</div>
+    <h2 class="sec-title reveal">Where I've made<br><em>measurable impact</em></h2>
+
+    <div class="exp-timeline">
+      <!-- Job 1 -->
+      <div class="exp-card reveal">
+        <div class="exp-meta">
+          <div class="exp-period">April 2025 — Present</div>
+          <div class="exp-company">FabricRoot E-commerce Pvt Ltd</div>
+          <div class="exp-location">Delhi, India</div>
+          <div class="exp-badge badge-current">● Current</div>
+        </div>
+        <div>
+          <div class="exp-role">MIS Analyst</div>
+          <ul class="exp-bullets">
+            <li>
+              <div class="bullet-icon">▲</div>
+              Executed robust ETL pipelines to extract, transform, and load data from multiple sources, ensuring <span class="exp-highlight highlight-cyan">99%+ data accuracy</span> for reliable reporting.
+            </li>
+            <li>
+              <div class="bullet-icon">▲</div>
+              Designed and maintained interactive dashboards using <strong>Google Looker Studio</strong>, <strong>Power BI</strong>, and Excel — converting complex datasets into executive-level visualisations for strategic decision-making.
+            </li>
+            <li>
+              <div class="bullet-icon">▲</div>
+              Conducted in-depth EDA using <strong>Python (Pandas, Matplotlib)</strong> to surface key business trends, patterns, and anomalies across e-commerce operations.
+            </li>
+            <li>
+              <div class="bullet-icon">▲</div>
+              Delivered data-driven strategic recommendations that directly contributed to a <span class="exp-highlight highlight-green">10% increase in sales revenue</span>.
+            </li>
+            <li>
+              <div class="bullet-icon">▲</div>
+              Collaborated with product, marketing, and operations teams to embed data insights into day-to-day business processes and performance optimisation initiatives.
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Job 2 -->
+      <div class="exp-card reveal">
+        <div class="exp-meta">
+          <div class="exp-period">March 2024 — April 2025</div>
+          <div class="exp-company">Msoft Secure Pvt Ltd</div>
+          <div class="exp-location">Noida, UP</div>
+          <div class="exp-badge badge-past">Previous</div>
+        </div>
+        <div>
+          <div class="exp-role">MIS Analyst</div>
+          <ul class="exp-bullets">
+            <li>
+              <div class="bullet-icon">◆</div>
+              Built and maintained ETL workflows for large-scale datasets, improving data reliability and reducing manual reporting errors.
+            </li>
+            <li>
+              <div class="bullet-icon">◆</div>
+              Developed interactive <strong>Power BI</strong> and Excel dashboards enabling real-time data visualisation for business stakeholders and leadership teams.
+            </li>
+            <li>
+              <div class="bullet-icon">◆</div>
+              Applied Python-based EDA to uncover customer behaviour trends and travel package purchase patterns, translating findings into targeted business strategies.
+            </li>
+            <li>
+              <div class="bullet-icon">◆</div>
+              Created pivot table analyses identifying key factors influencing sales, contributing to a <span class="exp-highlight highlight-green">measurable 10% uplift in revenue</span>.
+            </li>
+            <li>
+              <div class="bullet-icon">◆</div>
+              <strong>Automated recurring MIS reports</strong>, reducing manual effort by streamlining data extraction and formatting processes.
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── ACHIEVEMENTS ───── -->
+<section id="achievements">
+  <div class="section-inner">
+    <div class="sec-label reveal" style="color:var(--amber)">Key Achievements</div>
+    <h2 class="sec-title reveal">Results that<br><em>speak for themselves</em></h2>
+
+    <div class="ach-grid">
+      <div class="ach-card reveal">
+        <div class="ach-icon">📈</div>
+        <div class="ach-title">10% Sales Revenue Growth</div>
+        <div class="ach-desc">Achieved across two consecutive roles by delivering high-impact, data-driven insights that informed executive strategy and business decisions.</div>
+      </div>
+      <div class="ach-card reveal reveal-d1">
+        <div class="ach-icon">📊</div>
+        <div class="ach-title">End-to-End BI Dashboards</div>
+        <div class="ach-desc">Designed and deployed production-grade Power BI + Looker Studio dashboards adopted by cross-functional teams for daily operational decisions.</div>
+      </div>
+      <div class="ach-card reveal reveal-d2">
+        <div class="ach-icon">🔍</div>
+        <div class="ach-title">Customer Behaviour Intelligence</div>
+        <div class="ach-desc">Identified critical factors influencing customer purchase behaviour through Python-powered EDA, enabling targeted marketing interventions that drove conversions.</div>
+      </div>
+      <div class="ach-card reveal reveal-d3">
+        <div class="ach-icon">⚡</div>
+        <div class="ach-title">Automated MIS Reporting</div>
+        <div class="ach-desc">Streamlined data reporting workflows through ETL automation, significantly reducing time-to-insight for business stakeholders and eliminating manual errors.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── PROJECTS ───── -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="sec-label reveal" style="color:var(--cyan)">Projects</div>
+    <h2 class="sec-title reveal">Analysis projects<br><em>I'm proud of</em></h2>
+
+    <div class="proj-grid">
+      <div class="proj-card reveal">
+        <div class="proj-header">
+          <div class="proj-header-glow"></div>
+          <div class="proj-num">01</div>
+          <div class="proj-icon-wrap">🛒</div>
+          <div class="proj-title">Retailer Sales Performance Insights</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-desc">Extracted customer behaviours, sales trends, and product performance insights to provide recommendations that enhanced operations, optimised inventory, and improved customer satisfaction. Applied customer segmentation via PivotTables and time series analysis using VLOOKUP & SUMIFS to identify high-demand products.</div>
+          <div class="proj-tags">
+            <span class="pill pill-cyan">Excel</span>
+            <span class="pill pill-cyan">PivotTables</span>
+            <span class="pill pill-cyan">VLOOKUP</span>
+            <span class="pill pill-cyan">Time Series</span>
+            <span class="pill pill-cyan">Segmentation</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="proj-card reveal reveal-d1">
+        <div class="proj-header">
+          <div class="proj-header-glow"></div>
+          <div class="proj-num">02</div>
+          <div class="proj-icon-wrap">✈️</div>
+          <div class="proj-title">Travel Package Purchase Analysis</div>
+        </div>
+        <div class="proj-body">
+          <div class="proj-desc">Comprehensive data analysis of travel package purchases to derive actionable insights for targeted marketing strategies. Cleaned and pre-processed a dataset with 20+ variables, handled missing values and inconsistencies, and developed an interactive dashboard to visualise key purchase drivers and customer segments.</div>
+          <div class="proj-tags">
+            <span class="pill pill-violet">Python</span>
+            <span class="pill pill-violet">Data Cleaning</span>
+            <span class="pill pill-violet">Dashboard</span>
+            <span class="pill pill-violet">Marketing Analytics</span>
+            <span class="pill pill-violet">EDA</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── EDUCATION ───── -->
+<section id="education">
+  <div class="section-inner">
+    <div class="sec-label reveal" style="color:var(--pink)">Education & Certifications</div>
+    <h2 class="sec-title reveal">Building the<br><em>foundation</em></h2>
+
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <div class="edu-card-top"></div>
+        <div class="edu-year">2020 — 2023</div>
+        <div class="edu-degree">Bachelor of Computer Application (BCA)</div>
+        <div class="edu-inst">Maulana Mazrul Haque University, Patna, Bihar<br>Graduated: December 2023</div>
+      </div>
+
+      <div class="edu-card reveal reveal-d1">
+        <div class="edu-card-top"></div>
+        <div class="edu-year">July 2023 — December 2023</div>
+        <div class="edu-degree">Data Analysis Certification</div>
+        <div class="edu-inst">Uncodemy, Noida<br>EDA · Data Visualization · Python for Data Analysis · SQL</div>
+      </div>
+
+      <div class="edu-card reveal reveal-d2">
+        <div class="edu-card-top"></div>
+        <div class="edu-year">2020 — 2021</div>
+        <div class="edu-degree">Advance Diploma in Computer Application (ADCA)</div>
+        <div class="edu-inst">Office Automation · SQL/MS Access · C/C++ · Adobe Photoshop</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───── CONTACT ───── -->
+<section id="contact">
+  <div class="contact-orb contact-orb-1"></div>
+  <div class="contact-orb contact-orb-2"></div>
+  <div class="contact-inner">
+    <div class="sec-label reveal" style="color:var(--violet)">Contact</div>
+    <h2 class="sec-title reveal">Let's work<br><em>together</em></h2>
+    <p class="contact-sub reveal">Open to full-time, contract, and remote opportunities in data analytics, MIS, and business intelligence.</p>
+    <div class="contact-row reveal">
+      <a href="mailto:kundan9572700@gmail.com" class="contact-btn contact-btn-email">
+        ✉ kundan9572700@gmail.com
+      </a>
+      <a href="tel:+919572700201" class="contact-btn contact-btn-phone">
+        📞 +91 9572700201
+      </a>
+      <span class="contact-btn contact-btn-loc">
+        📍 Delhi, India
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>© 2025 Kundan Kushwaha</span>
+  <span style="color:var(--violet)">MIS Analyst · Data & Business Intelligence</span>
+</footer>
+
+<script>
+// Cursor glow
+const glow = document.getElementById('cursorGlow');
+document.addEventListener('mousemove', e => {
+  glow.style.left = e.clientX + 'px';
+  glow.style.top = e.clientY + 'px';
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); }
+  });
+}, {threshold: 0.1});
+reveals.forEach(r => obs.observe(r));
+</script>
+</body>
+</html>
